@@ -150,3 +150,25 @@ class DbHandler:
             cursor.execute(instruction)
 
             conn.commit()
+
+    @staticmethod
+    def remove_task_from_db(path_to_db, task_name):
+        with sqlite3.connect(path_to_db) as conn:
+            cursor = conn.cursor()
+
+            instruction = "select id from tasks where name='{}'".format(task_name)
+            cursor.execute(instruction)
+            row = cursor.fetchone()
+
+            if row is None:
+                return
+            task_id = row[0]
+
+            instruction = "delete from topic_tasks where task_id={}".format(task_id)
+            cursor.execute(instruction)
+
+            instruction = "delete from tasks where id={}".format(task_id)
+            cursor.execute(instruction)
+
+            conn.commit()
+

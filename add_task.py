@@ -1,17 +1,7 @@
 import argparse
-import sqlite3
-import os
 
 from dbhandler import DbHandler
-
-def clear_screen():
-    # for windows
-    if os.name == 'nt':
-        os.system('cls')
-
-    # for mac and linux (here, os.name is 'posix')
-    else:
-        os.system('clear')
+from utils import clear_screen, check_db_exists
 
 def get_topic_name(path_to_db):
     print("\nCurrent list of topics:\n")
@@ -33,12 +23,13 @@ def get_topic_name(path_to_db):
                 return topic_name
 
 def get_task_name(path_to_db):
-    print("\nPlease insert the task name, case insensitive. It must not exist.")
+    print("\nPlease insert the task name, case sensitive. It must not exist.")
     all_tasks = DbHandler.get_all_tasks(path_to_db)
+    all_tasks = [x.lower() for x in all_tasks]
 
     while True:
         task_name = input("Task name: ")
-        if task_name in all_tasks:
+        if task_name.lower() in all_tasks:
             print("This task already exists.")
         else:
             return task_name
@@ -85,9 +76,6 @@ def greet():
         if input() == "done":
             break
 
-def check_db_exists(path):
-    return os.path.exists(path)
-
 def get_task_desc():
     return input("Please provide the task description:\nDescription: ")
 
@@ -119,6 +107,8 @@ def main():
     added_by = get_added_by()
 
     insert_data_in_db(args.db, topic, task, checker_name, checker_language, description, added_by)
+
+    print("Done")
 
 if __name__ == "__main__":
     main()

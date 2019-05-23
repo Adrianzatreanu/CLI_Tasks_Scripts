@@ -8,6 +8,9 @@ underscores by default.
 
 This repo also contains scripts to add or remove tasks.
 
+Currently supported languages for checker scripts:
+ - shell
+
 # Usage
 
 In order to add a new task, simply run:
