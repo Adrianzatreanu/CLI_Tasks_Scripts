@@ -1,4 +1,6 @@
 import argparse
+import os
+import re
 
 from dbhandler import DbHandler
 from utils import clear_screen, check_db_exists
@@ -10,14 +12,14 @@ def get_topic_name(path_to_db):
     for topic in topics:
         print(topic)
 
-    print("\nPlease insert the topic name, or a new one, case sensitive. It cannot contain spaces.")
+    print("\nPlease insert the topic name, or a new one, case insensitive. It cannot contain spaces.")
 
     while True:
         topic_name = input("Topic name: ")
         if " " in topic_name:
             print("It cannot contain spaces.")
         else:
-            if not os.path.exists("scripts/" + topic_name):
+            if not os.path.exists("scripts/" + topic_name.lower()):
                 print("Directory scripts/" + topic_name + " not found.")
             else:
                 return topic_name

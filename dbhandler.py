@@ -132,10 +132,8 @@ class DbHandler:
             checker_language_id = row[0]
 
             # add to tasks
-            instruction = "insert into tasks(id, name, added_by, checker_name, checker_language_id, description) " + \
-                "values(NULL, '{}', '{}', '{}', {}, '{}')".format(task, added_by, checker_name, checker_language_id, description)
-            cursor.execute(instruction)
-            conn.commit()
+            cursor.execute("insert into tasks(id, name, added_by, checker_name, checker_language_id, description) " + \
+                "values(NULL, ?, ?, ?, ?, ?)", (task, added_by, checker_name, checker_language_id, description))
 
             instruction = "select id from tasks where name='{}'".format(task)
             cursor.execute(instruction)
