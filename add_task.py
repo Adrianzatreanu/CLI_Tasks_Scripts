@@ -20,8 +20,11 @@ def get_topic_name(path_to_db):
             print("It cannot contain spaces.")
         else:
             if not os.path.exists("scripts/" + topic_name.lower()):
-                print("Directory scripts/" + topic_name + " not found.")
+                print("Directory scripts/" + topic_name.lower() + " not found.")
             else:
+                for topic in topics:
+                    if topic_name.lower() == topic.lower():
+                        return topic
                 return topic_name
 
 def get_task_name(path_to_db):
@@ -45,8 +48,8 @@ def get_checker_name(path_to_db, topic_name):
         if checker_name in all_checker_names:
             print("Checker name already exists for topic " + DbHandler.get_topic_for_checker(path_to_db, checker_name))
         else:
-            if not os.path.exists("scripts/" + topic_name + "/" + checker_name):
-                print("File scripts/" + topic_name + "/" + checker_name + " not found.")
+            if not os.path.exists("scripts/" + topic_name.lower() + "/" + checker_name):
+                print("File scripts/" + topic_name.lower() + "/" + checker_name + " not found.")
             else:
                 return checker_name
 
