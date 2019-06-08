@@ -1,0 +1,1 @@
+diff <(cat /etc/passwd | cut -f 1 -d :) /home/ubuntu/users.txt
