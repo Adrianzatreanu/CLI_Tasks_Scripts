@@ -71,6 +71,7 @@ def greet():
     clear_screen()
     print("Hello. Please copy your checker script in the scripts directory, " + \
         "under the topic name folder.\nIf it does not exist, create it. " + \
+        "The checker script must return 0 on success and non zero on failure. " + \
         "The topic and task names should be all lower case and should contain no " + \
         "spaces.\nPlease use underscores instead of spaces.\n\n"
         "Example: scripts/filesystem/file_maker.py.\n\nNote: your task name may " + \
@@ -93,7 +94,7 @@ def get_added_by():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d','--db', help='Sqlite database location',
+    parser.add_argument('-d','--db', help='Sqlite database location (usually under CLI_Tasks/db/cli_tasks.db)',
         type=str, required=True)
     args = parser.parse_args()
 
@@ -113,7 +114,8 @@ def main():
 
     insert_data_in_db(args.db, topic, task, checker_name, checker_language, description, added_by)
 
-    print("Done")
+    print("Done. In order for the changes to become widely visible, you need to merge this code " + \
+        "and the database into master.")
 
 if __name__ == "__main__":
     main()

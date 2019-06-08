@@ -13,10 +13,14 @@ Currently supported languages for checker scripts:
 
 # Usage
 
-In order to add a new task, simply run:
+In order to add a new task, you will need to write a script in a supported language
+that returns 0 on success, non zero otherwise. Then simply run:
 ```
 $ python3 add_task.py --db <db_location>
 ```
+where db_location is the sqlite database file (usually in the CLI_Tasks repo, under CLI_Tasks/db/cli_tasks.db).
+Once your local database and this repository are modified, you will need to do a Pull Request
+and merge both of them on master so that the changes become visible.
 
 To delete a task:
 ```
